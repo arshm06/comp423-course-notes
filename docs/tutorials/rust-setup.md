@@ -1,8 +1,9 @@
 
 # Setting up a dev container for Rust
 
-* Primary author: [Arsh Madhani](https://arshm06)
+* Primary author: [Arsh Madhani](https://github.com/arshm06)
 * Seconday author: Kris Jordan's Comp 423 Tutorial
+* Reviewer: [Rithwik Mishra](https://github.com/rithwik-mishra)
 
 ## Part 1 - Prerequisites:
 
@@ -36,7 +37,7 @@ git init
 ```
 D. Create a README file:
 ```bash
-echo "" > README.md
+echo "# Hello Rust" > README.md
 git add README.md
 git commit -m "Initial commit with README"
 ```
@@ -61,9 +62,10 @@ git commit -m "Initial commit with README"
 
 1. **Add the GitHub repository as a remote:**
 ```bash
-git remote add origin https://github.com/<your-username>/rust-setup-tutorial.git
+git remote add origin https://github.com/your-username/rust-setup-tutorial.git
 ```
-Replace `your-username` with your GitHub username.
+!!! warning
+    Make sure to replace `your-username` with your GitHub username.
 
 1. Check your default branch name with the subcommand ` git branch `. If it's not `main`, rename it to main with the following command: ` git branch -M main `. Old versions of ` git ` choose the name ` master ` for the primary branch, but these days ` main ` is the standard primary branch name.
 
@@ -84,13 +86,9 @@ Why is this valuable? In the technology industry, teams often work on complex pr
 ### How are software project dependencies managed?
 To effectively manage software dependencies, it's important to understand package and dependency management. In most software projects, you rely on external libraries or packages to save time and leverage work that has already been done by others. Managing these dependencies ensures that your project has access to the correct versions of these libraries, avoiding compatibility issues.
 
-In this project, our primary dependency is mkdocs-material, which enables us to build and style our static site. This package is available on cargo, the Rust Package Manager, which is a repository of software for the Rust programming language.
-
 To ensure your dependencies are always correctly installed and available, in standard Rust projects relying on cargo, requirements are traditionally listed out in a Cargo.toml file in the project's root directory. This file is committed to your project's version control history so that as your project adds or updates dependencies, it is reflected in the project's history. This allows anyone working on the project to quickly set up their environment by installing the necessary dependencies with the pip install command. The dev container configuration you setup will automatically install dependencies from Cargo.toml when the container is created. This allows anyone working on the project to have a complete environment setup in one step: starting a dev container.
 
 In summary, the the devcontainer.json file specifies configuration for a consistent development environment using a Docker image. The Cargo.toml file ensures all needed Rust package for our project are installed when the container is created. Together, these files automate the process of setting up a developer environment, making it easier for you and others to work on the project.
-
-Lets establish your static website development environment:
 
 ### Step 1. Add Development Container Configuration
 1. In VS Code, open the rust-setup-tutorial directory. You can do this via: File > Open Folder.
@@ -118,31 +116,34 @@ Lets establish your static website development environment:
 
 ### Step 3. Reopen the Project in a VSCode Dev Container
 
-Reopen the project in the container by pressing `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), typing "Dev Containers: Reopen in Container," and selecting the option. This may take a few minutes while the image is downloaded and the requirements are installed.
+1. Reopen the project in the container by pressing `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac), typing "Dev Containers: Reopen in Container," and selecting the option. This may take a few minutes while the image is downloaded and the requirements are installed.
 
-Once your dev container setup completes, close the current terminal tab (trash can), open a new terminal pane within VSCode, and try running `rustc --version` to see your dev container is running a recent version of Rust without much effort!
+2. Once your dev container setup completes, close the current terminal tab (trash can), open a new terminal pane within VSCode, and try running ```#!bash rustc --version``` to see your dev container is running a recent vesrsion of Rust without much effort!
 
 ### Step 4. Create a new Rust Project
 
-With the Dev Container running, the next step is to create a new Rust project using the cargo new command. Run the following in your terminal:
-```rust
+1. With the Dev Container running, the next step is to create a new Rust project using the cargo new command. Run the following in your terminal:
+```bash
 cargo new rust_project --vcs none
 cd rust_project
 ```
+!!! note
+    The --vcs flag ensures that a new git repository is not already created on our behalf since we made one in our previous steps!
 
-Inside your rust_project directory, open the src/main.rs file. Modify it to print "Hello COMP423" to the standard output:
+2. Inside your rust_project directory, open the src/main.rs file. Modify it to print "Hello COMP423" to the standard output:
 ```rust
 fn main() {
     println!("Hello COMP423");
 }
-
 ```
-Next, use the cargo build command to compile the project.
-```rust
+
+3. Next, use the cargo build command to compile the project.
+```bash
 cargo build
 ```
-The cargo build command will download any dependencies (if needed) and compile the project.This is similar to how you would use gcc in COMP211 to compile a C program. The compiled file will be located in the target/debug directory.
-To run the compiled program, use the cargo run command. This will both compile and execute the program, and you should see the following output:
+4. The ```#!bash cargo build``` command will download any dependencies (if needed) and compile the project. This is similar to how you would use the ```gcc``` command in COMP211 to compile a C program. The compiled file will be located in the ```target/debug``` directory.
+<br/>
+To run the compiled program, use the ```#!bash cargo run command```. This will both compile and execute the program, and you should see the command line output the string "Hello COMP423" from the main.rs file.
 
 
 !!! info "Differences Between Cargo build and Cargo run:"
